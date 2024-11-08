@@ -1,0 +1,271 @@
+* {
+    padding: 0px auto;
+    margin: 0px auto;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 2200px;
+}
+
+.top {
+    width: 100%;
+    height: 180px;
+    background-color: #000;
+    background-image: url("../IMG/bg-top.jpg");
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-left {
+    width: 20%;
+    height: 100%;
+    margin-bottom: 50px;
+}
+
+.top-middle {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.top-middle h1 {
+    font-size: 100px; 
+    color: #fff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.top-middle h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+
+/* ẢNH CHẠY */
+.container{
+    width: 100%;
+    height: 500px;
+    background-color: #000;
+    background-image: url("../IMG/backgroud4.jpg");
+    text-align: center;
+}
+
+.slideshow{
+    overflow: hidden;
+    height: 500px;
+    width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.slide{
+    width: 500%;
+    animation: slideShow 16s infinite;
+}
+
+.image {
+    float: left;
+    height: 500px;
+    width: 1100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    -webkit-box-reflect: below 1px linear-gradient(linear, right top, right bottom, form(transparent), to(rgba(255, 255, 255, 0.1)));
+}
+
+.image img{
+    width: 80%;
+    height: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 6px solid #000000; 
+}
+
+@keyframes slideShow {
+    0% {margin-left: 0%;}
+    20% {margin-left: 0%;}
+    25% {margin-left: -100%;}
+    45% {margin-left: -100%;}
+    50% {margin-left: -200%;}
+    70% {margin-left: -200%;}
+    75% {margin-left: -300%;}
+    95% {margin-left: -300%;}
+    100% {margin-left: 0%;}
+}
+
+/*--------------menu--------------*/
+.menu{
+    background-color: #000;
+    height: 60px;
+    width: 98%;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.menu input{            
+    background: transparent; /* Nền trong suốt */
+    border: 3px solid #423e3e; /* Đường viền */
+    width: 30%;
+    height: 40px;
+    margin-top: 7px;
+    margin-left: 120px;
+    font-size: 20px;;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.menu ul{
+    list-style: none;
+    float: left;
+    text-align: center;
+}
+
+.menu ul li{    
+    float: left;
+    margin-left: 80px;
+    margin-top: 5px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+}
+
+.menu ul li a:hover{
+    color: red;
+}
+
+.search{
+    background-color: #000;
+    width: 100%;
+    height: 700px;
+    margin-top: px;
+    background-image: url("../IMG/bg-top3.jpg");
+    justify-content: center;
+}
+
+.search h2{
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: center  ;
+}
+
+.products{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.products li{
+    flex-basis: 25%;
+    padding-top: 30px;
+}
+
+.products li img{
+    max-width: 80%;
+    height: auto;
+    padding-top: 30px;
+}
+
+.product-item a{
+    text-decoration: none;
+}
+
+.product-item a p{
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    margin-right: 60px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+/*--------------trademark--------------*/
+.trademark{
+    background-color: #000;
+}
+.trademark img{
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+}
+
+.list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-image: url("../IMG/backroud.jpg");
+}
+
+.list li{
+    flex-basis: 15%;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+.list li img{
+    max-width: 80%;
+    height: auto;
+    border-radius: 40px;
+    border: #000 solid 5px;
+}
+
+/*--------------footer--------------*/
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 20px;
+    text-align: left;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.footer-column p a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.footer-column p a:hover {
+    color: red;
+}
+

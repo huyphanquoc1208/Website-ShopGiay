@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" href="../CSS/GioHang.css">
+</head>
+<body>
+    <div class="top">
+        <div class="top-left">
+            <a href="../HTML/index.html">
+                <img src="../IMG/Logo.png" alt="">
+            </a>
+        </div>
+        <div class="top-right">
+            <ul id="main-top">
+                <h1 style="color: #fff;">- A T A K A -</h1>
+                <h2>★☆★ STORE ★☆★</h2>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li><a href="../HTML/index.html">Trang chủ</a></li>
+            <li><a href="../HTML/GioiThieu.html">Giới thiệu</a></li>
+            <li><a href="../HTML/GioHang.html">Giỏ hàng</a></li>
+            <li><a href="../HTML/TaiKhoan.html">Tài khoản</a></li>
+        </ul>
+        <input class="search" type="text" placeholder="Nhập sản phẩm cần tìm kiếm">
+    </div>
+    
+    <div class="giohang">
+        <div class="giohang-left">
+            <h1>Sản phẩm trong giỏ hàng</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Kích thước</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="cartDisplay">
+                    <!-- Sản phẩm sẽ được thêm vào đây -->
+                </tbody>
+            </table>
+            <h2>Tổng thanh toán: <span id="totalAmount">0 VND</span></h2>
+            <button id="checkout-button">Thanh toán</button>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nhập Thông Tin</h2>
+            <form id="paymentForm">
+                <input type="text" id="input-name" placeholder="Tên" required>
+                <input type="text" id="input-phone" placeholder="Số Điện Thoại" required>
+                <input type="email" id="input-email" placeholder="Email" required>
+                <input type="text" id="input-address" placeholder="Địa Chỉ" required>
+                <select id="payment-method" required>
+                    <option value="">Hình Thức Thanh Toán</option>
+                    <option value="chuyển khoản">Chuyển Khoản</option>
+                    <option value="tiền mặt">Tiền Mặt</option>
+                    <option value="tại cửa hàng">Tại Cửa Hàng</option>
+                </select>
+                <button type="submit">Xác Nhận Thanh Toán</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="payment-info" style="display: none;">
+        <h2>Thông Tin Thanh Toán</h2>
+        <table>
+            <tr>
+                <th>Tên</th>
+                <th>Số Điện Thoại</th>
+                <th>Email</th>
+                <th>Địa Chỉ</th>
+                <th>Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Giá Tiền</th>
+                <th>Hình Thức Thanh Toán</th>
+            </tr>
+            <tr>
+                <td id="name"></td>
+                <td id="phone"></td>
+                <td id="email"></td>
+                <td id="address"></td>
+                <td id="product"></td>
+                <td id="total-quantity"></td>
+                <td id="price"></td>
+                <td id="payment-method-display"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+        // Hàm để hiển thị giỏ hàng
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartDisplay = document.getElementById("cartDisplay");
+            cartDisplay.innerHTML = ""; // Xóa nội dung cũ
+            
+            let totalAmount = 0;
+
+            cart.forEach((item, index) => {
+                const totalProduct = item.price * item.quantity; // Tính tổng cho sản phẩm
+                totalAmount += totalProduct;
+
+                // Thêm hàng vào bảng giỏ hàng
+                cartDisplay.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.price.toLocaleString()} VND</td>
+                        <td>${item.size}</td>
+                        <td>${item.quantity}</td>
+                        <td>${totalProduct.toLocaleString()} VND</td>
+                        <td>
+                            <button class="remove-btn" data-index="${index}">Xóa</button>
+                            <button class="add-btn" data-index="${index}">Thêm</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById("totalAmount").innerText = totalAmount.toLocaleString() + " VND";
+    
+            // Thêm sự kiện cho nút "Xóa" và "Thêm"
+            const removeButtons = document.querySelectorAll('.remove-btn');
+            const addButtons = document.querySelectorAll('.add-btn');
+    
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    cart.splice(index, 1); // Xóa sản phẩm khỏi giỏ hàng
+                    localStorage.setItem("cart", JSON.stringify(cart)); // Cập nhật localStorage
+                    displayCart(); // Cập nhật lại giỏ hàng
+                });
+            });
+    
+            addButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const newQuantity = parseInt(prompt("Nhập số lượng mới:", cart[index].quantity));
+                    if (!isNaN(newQuantity) && newQuantity >= 0) {
+                        cart[index].quantity = newQuantity; // Cập nhật số lượng
+                        localStorage.setItem("cart", JSON.stringify(cart)); // Cập nhật localStorage
+                        displayCart(); // Cập nhật lại giỏ hàng
+                    } else {
+                        alert("Vui lòng nhập số lượng hợp lệ.");
+                    }
+                });
+            });
+        }
+    
+        // Gọi hàm displayCart khi trang được tải
+        window.onload = displayCart;
+    
+        // Modal
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("checkout-button");
+        var span = document.getElementsByClassName("close")[0];
+    
+        // Khi nhấn nút "Thanh toán", mở modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+    
+        // Khi nhấn "x", đóng modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        // Xử lý xác nhận thanh toán
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn việc gửi form
+
+            // Lấy thông tin từ các trường nhập liệu
+            const name = document.getElementById('input-name').value;
+            const phone = document.getElementById('input-phone').value;
+            const email = document.getElementById('input-email').value;
+            const address = document.getElementById('input-address').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            // Lấy thông tin sản phẩm từ giỏ hàng
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const product = cart.map(item => item.name).join("<br>"); // Liệt kê tên sản phẩm ra từng dòng
+
+            // Tính tổng số lượng và giá tiền
+            const totalQuantity = cart.reduce((acc, item) => acc + (Number.isInteger(item.quantity) && item.quantity >= 0 ? item.quantity : 1), 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0); // Tính tổng giá tiền
+
+            // Hiển thị thông tin vào bảng
+            document.getElementById('name').textContent = name;
+            document.getElementById('phone').textContent = phone;
+            document.getElementById('email').textContent = email;
+            document.getElementById('address').textContent = address;
+            document.getElementById('product').innerHTML = product; // Hiển thị sản phẩm với <br>
+            document.getElementById('total-quantity').textContent = totalQuantity; // Hiển thị tổng số lượng
+            document.getElementById('price').textContent = totalPrice.toLocaleString() + " VND"; // Tổng giá tiền
+            document.getElementById('payment-method-display').textContent = paymentMethod;
+
+            // Hiển thị bảng thông tin
+            document.getElementById('payment-info').style.display = 'block';
+            modal.style.display = "none"; // Đóng modal
+        });
+    </script>
+</body>
+</html>

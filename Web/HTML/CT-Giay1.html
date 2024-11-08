@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/CT-Giay.css">
+</head>
+<body>
+    <div class="top">
+        <div class="top-left">
+            <a href="../HTML/index.html">
+                <img src="../IMG/Logo.png" link="../HTML/index.html" alt="">
+            </a>
+        </div>
+        <div class="top-right">
+            <ul id = "main-top">
+                <h1 style="color: #fff;">- A T A K A -</h1>
+                <h2>★☆★ STORE ★☆★</h2>
+            </ul>
+        </div>
+    </div>
+
+    <div class = "menu">
+        <ul>
+            <li><a href="../HTML/index.html">Trang chủ</a></li>
+            <li><a href="../HTML/GioiThieu.html">Giới thiệu</a></li>
+            <li><a href="../HTML/GioHang.html">Giỏ hàng</a></li>
+            <li><a href="../HTML/TaiKhoan.html">Tài khoản</a></li>
+        </ul>
+        <input type="text" placeholder=" Nhập sản phẩm cần tìm kiếm">
+    </div>
+
+    <div class = "info">
+        <div class = "info-left">
+            <img src="../IMG/cv.jpg" alt="">
+        </div>
+        <div class = "info-right">
+            <h1 style="color: #fff;">CONVERSE CHUCK 70 HI BLACK / EGRET</h1>
+            <p>1.500.000 VND</p>
+            <div class="size-options">
+                <div class="size-option" data-size="38" onclick="selectSize(this)">38</div>
+                <div class="size-option" data-size="39" onclick="selectSize(this)">39</div>
+                <div class="size-option" data-size="40" onclick="selectSize(this)">40</div>
+                <div class="size-option" data-size="41" onclick="selectSize(this)">41</div>
+                <div class="size-option" data-size="42" onclick="selectSize(this)">42</div>
+            </div>
+
+            <!-- Phần nhập số lượng -->
+            <div class="quantity-container">
+                <label>Số lượng:</label>
+                <input type="number" id="quantity" value="1" min="1">
+            </div>
+    
+            <div class="add">
+                <button class="add-dh" onclick="addToCart()">Mua ngay</button>
+            </div>
+
+        </div>
+        <div class="info-content">
+            <img src="../IMG/cv-chuck.jpg" alt="">
+            <img src="../IMG/cv-chuck1.jpg" alt="">
+            <img src="../IMG/cv-chuck2.jpg" alt="">
+            <h2>Thiết kế</h2>
+            <p>Chất liệu: Giày thường được làm từ canvas, mang lại sự nhẹ nhàng và thoải mái.<br>
+                Phong cách: Mẫu này đã được thiết kế khác đi một chút với cổ chân được làm cao lên nhưng vẫn giữ được vẻ tối giản và hiện đại, dễ phối đồ với nhiều loại trang phục.
+            </p>
+        </div>
+        <div class="info-content1">
+            <h2>Tính Năng</h2>
+            <p>Đế giày: Đế cao su với độ bám tốt, giúp tăng cường khả năng di chuyển trên sân bóng.<br>
+                Hỗ trợ: Một số mẫu có thêm lớp đệm ở bên trong để tăng cường sự thoải mái khi di chuyển.
+            </p>
+        </div>
+        <div class="info-content2">
+            <h2>Đối Tượng Sử Dụng</h2>
+            <p>Chơi thể thao: Phù hợp cho các hoạt động thể thao như bóng rổ.<br>
+                Thời trang hàng ngày: Có thể mặc trong các dịp thường ngày, đi dạo phố.
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="../IMG/logo-ctsp-cv.jpg" alt="">
+    </div>
+
+    <script>
+        function selectSize(element) {
+            const options = document.querySelectorAll('.size-option');
+            options.forEach(option => option.classList.remove('selected')); // Bỏ chọn tất cả
+            element.classList.add('selected'); // Đánh dấu kích thước đã chọn
+        }
+
+        function addToCart() {
+            const quantity = document.getElementById("quantity").value;
+            const selectedSize = document.querySelector('.size-option.selected');
+
+            if (!selectedSize) {
+                alert("Vui lòng chọn kích thước!");
+                return;
+            }
+
+            const product = {
+                name: "CONVERSE CHUCK 70 HI BLACK/EGRET",
+                price: 1500000,
+                size: selectedSize.getAttribute('data-size'),
+                quantity: quantity,
+                total: 1500000 * quantity
+            };
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+    </script>
+
+</body>
+</html>

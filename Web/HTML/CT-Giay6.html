@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/CT-Giay.css">
+</head>
+<body>
+    <div class="top">
+        <div class="top-left">
+            <a href="../HTML/index.html">
+                <img src="../IMG/Logo.png" link="../HTML/index.html" alt="">
+            </a>
+        </div>
+        <div class="top-right">
+            <ul id = "main-top">
+                <h1 style="color: #fff;">- A T A K A -</h1>
+                <h2>★☆★ STORE ★☆★</h2>
+            </ul>
+        </div>
+    </div>
+
+    <div class = "menu">
+        <ul>
+            <li><a href="../HTML/index.html">Trang chủ</a></li>
+            <li><a href="../HTML/GioiThieu.html">Giới thiệu</a></li>
+            <li><a href="../HTML/GioHang.html">Giỏ hàng</a></li>
+            <li><a href="../HTML/TaiKhoan.html">Tài khoản</a></li>
+        </ul>
+        <input type="text" placeholder=" Nhập sản phẩm cần tìm kiếm">
+    </div>
+
+    <div class = "info">
+        <div class = "info-left">
+            <img src="../IMG/ad8.jpg" alt="">
+        </div>
+        <div class = "info-right">
+            <h1 style="color: #fff;">Adidas Originals Continental 80</h1>
+            <p>2.000.000 VND</p>
+            <div class="size-options">
+                <div class="size-option" data-size="38" onclick="selectSize(this)">38</div>
+                <div class="size-option" data-size="39" onclick="selectSize(this)">39</div>
+                <div class="size-option" data-size="40" onclick="selectSize(this)">40</div>
+                <div class="size-option" data-size="41" onclick="selectSize(this)">41</div>
+                <div class="size-option" data-size="42" onclick="selectSize(this)">42</div>
+            </div>
+
+            <!-- Phần nhập số lượng -->
+            <div class="quantity-container">
+                <label>Số lượng:</label>
+                <input type="number" id="quantity" value="1" min="1">
+            </div>
+    
+            <div class="add">
+                <button class="add-dh" onclick="addToCart()">Mua ngay</button>
+            </div>
+        </div>
+
+        <div class="info-content">
+            <img src="../IMG/ad8-ic.jpg" alt="">
+            <img src="../IMG/ad8-ic1.jpg" alt="">
+            <img src="../IMG/ad8-ic2.jpg" alt="">
+            <h2>Thiết kế</h2>
+            <p>Phong cách: Thiết kế cổ điển, với upper làm bằng da và các chi tiết may trắng, xanh, tạo nên sự thanh lịch.
+            </p>
+        </div>
+        <div class="info-content1">
+            <h2>Tính Năng</h2>
+            <p>Đế giày: Đế cao su dày dặn, mang lại độ ôm chân thoải mái và lực bám tốt.<br>
+                Hỗ trợ: Một số mẫu có thêm lớp đệm ở bên trong để tăng cường sự thoải mái khi di chuyển.
+            </p>
+        </div>
+        <div class="info-content2">
+            <h2>Đối Tượng Sử Dụng</h2>
+            <p>Với mức giá phù hợp, Continental 80 sẽ là sự lựa chọn tuyệt vời cho những người yêu thích phong cách thời trang năng động và lịch lãm.</p>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="../IMG/adidas.png" alt="">
+    </div>
+
+    <script>
+        function selectSize(element) {
+            const options = document.querySelectorAll('.size-option');
+            options.forEach(option => option.classList.remove('selected')); // Bỏ chọn tất cả
+            element.classList.add('selected'); // Đánh dấu kích thước đã chọn
+        }
+
+        function addToCart() {
+            const quantity = document.getElementById("quantity").value;
+            const selectedSize = document.querySelector('.size-option.selected');
+
+            if (!selectedSize) {
+                alert("Vui lòng chọn kích thước!");
+                return;
+            }
+
+            const product = {
+                name: "Adidas Originals Continental 80",
+                price: 2000000,
+                size: selectedSize.getAttribute('data-size'),
+                quantity: quantity,
+                total: 2000000 * quantity
+            };
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alert("Sản phẩm đã được thêm vào giỏ hàng!");
+        }
+    </script>
+
+</body>
+</html>

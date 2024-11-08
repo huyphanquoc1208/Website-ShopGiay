@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/TaiKhoan.css">
+    <script src="../JS/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <div class="top">
+        <div class="top-left">
+            <a href="../HTML/index.html">
+                <img src="../IMG/Logo.png" link="../HTML/index.html" alt="">
+            </a>
+        </div>
+        <div class="top-right">
+            <ul id = "main-top">
+                <h1 style="color: #fff;">- A T A K A -</h1>
+                <h2>★☆★ STORE ★☆★</h2>
+            </ul>
+        </div>
+    </div>
+
+    <div class = "menu">
+        <ul>
+            <li><a href="../HTML/index.html">Trang chủ</a></li>
+            <li><a href="../HTML/GioiThieu.html">Giới thiệu</a></li>
+            <li><a href="../HTML/GioHang.html">Giỏ hàng</a></li>
+            <li><a href="../HTML/TaiKhoan.html">Tài khoản</a></li>
+        </ul>
+        <input type="text" placeholder=" Nhập sản phẩm cần tìm kiếm">
+    </div>
+
+    <div class="container">
+        <h2>Đăng Ký Thành Viên</h2>
+        <form id="registrationForm">
+            <input type="name" id="name" placeholder="Họ và tên" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Mật khẩu" required>
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <div class="links">
+            <a href="login.html">Đăng nhập</a>
+        </div>
+        <div id="message"></div>
+        <div id="userInfo" style="display: none;">
+            <h3>Thông tin thành viên:</h3>
+            <p id="infoName"></p>
+            <p id="infoEmail"></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#registrationForm').on('submit', function(event) {
+                event.preventDefault(); // Ngăn chặn việc gửi form
+
+                // Lấy dữ liệu từ form
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+                // Kiểm tra dữ liệu
+                if (name && email && password) {
+                    // Lưu thông tin vào LocalStorage
+                    var users = JSON.parse(localStorage.getItem('users')) || [];
+                    users.push({ name: name, email: email, password: password });
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    // Hiển thị thông báo thành công
+                    $('#message').html('<p>Đăng ký thành công! Thông tin của bạn đã được lưu.</p>').css('color', 'green');
+
+                    // Hiển thị thông tin thành viên
+                    $('#infoName').text('Họ và tên: ' + name);
+                    $('#infoEmail').text('Email: ' + email);
+                    $('#userInfo').show(); // Hiện phần thông tin thành viên
+
+                    // Xóa form sau khi đăng ký
+                    $('#registrationForm')[0].reset();
+                } else {
+                    $('#message').html('<p>Vui lòng điền đầy đủ thông tin.</p>').css('color', 'red');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
