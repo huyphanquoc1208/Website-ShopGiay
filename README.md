@@ -14,9 +14,8 @@ Dự án website thương mại điện tử chuyên kinh doanh giày dép, cung
   * Thống kê doanh thu, báo cáo số lượng sản phẩm bán ra theo ngày/tháng.
 
 ### 🛠️ Công nghệ sử dụng
-* **Frontend:** HTML5, CSS3, JavaScript / ReactJS / Bootstrap
-* **Backend:** Node.js (Express) / PHP / Java
-* **Cơ sở dữ liệu:** MySQL / MongoDB
+* **Frontend:** HTML5, CSS3, JavaScript / Bootstrap
+* **Backend:**  Java
 
 ### ⚙️ Hướng dẫn cài đặt
 1. Clone repository về máy:
