@@ -1,4 +1,4 @@
-## 1. 👟 Website Shop Giày (E-Commerce Shoe Store)
+## 👟 Website Shop Giày (E-Commerce Shoe Store)
 Dự án website thương mại điện tử chuyên kinh doanh giày dép, cung cấp trải nghiệm mua sắm trực tuyến mượt mà cho khách hàng và trang quản trị tiện lợi cho chủ cửa hàng.
 
 ### 🚀 Tính năng nổi bật
